@@ -17,39 +17,30 @@ def return_int(s):
 
 def get_reward(drv):
 
-    print("in get reward")
     for award in AWARDS:
         money1 = drv.find_element(By.ID, "money")
         a = drv.find_element(By.ID, award)
         c = a.get_attribute("class")
         x = a.text.split("\n")
         m1 = x[0].split("-")
-        # print("4")
+ 
         cost = return_int(m1[1])
         money = return_int(money1.text)
 
         if not c:
             if money > cost:
                 print(a.text)
-                # try:
-                #     a.click()
-                # except selenium.common.exceptions.StaleElementReferenceException:
-                #     print("pas geciyorum")
+                try:
+                    a.click()
+                except selenium.common.exceptions.StaleElementReferenceException:
+                    print("Stale problem\n")
 
-                # print(f"money: {money} and cost is {m}")
+
         del a, c, x
-        # del a, c, x, m1, cost, money
+    
 
 
 driver = webdriver.Chrome()
-# driver.get("https://www.google.com/")
-#
-# chrome_options = webdriver.ChromeOptions()
-# chrome_driver_path = '/Users/metinkoc/Downloads/chromedriver-mac-arm64/chromedriver'
-# # chrome_options.add_experimental_option("detach", True)
-#
-# # driver = webdriver.Chrome(options=chrome_options)
-# driver = webdriver.Chrome(chrome_driver_path)
 
 driver.get("http://orteil.dashnet.org/experiments/cookie/")
 
